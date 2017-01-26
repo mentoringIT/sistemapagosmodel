@@ -16,6 +16,7 @@ import mx.com.mentoringit.model.dto.UserDTO;
 public class UserDAO implements IUser {
 
 	public UserDAO() {
+		// TODO Auto-generated constructor stub
 	}
 	private JdbcTemplate jdbcTemplate;
 
