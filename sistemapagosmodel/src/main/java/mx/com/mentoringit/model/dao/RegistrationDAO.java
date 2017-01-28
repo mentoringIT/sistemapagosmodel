@@ -24,12 +24,13 @@ public class RegistrationDAO implements IRegistration{
 	}
 
 
-	public List<StudentDTO> select(Integer id) throws Exception {
+	public List<StudentDTO> select(Integer id, String date) throws Exception {
 		String select = "select tbl_student.name " + 
 						"from tbl_student, tbl_registration " +
 						"where tbl_registration.student_id = tbl_student.id " +
-						"and tbl_registration.course_id = ? ";
-		List<StudentDTO> lstd = this.jdbcTemplate.query(select, new Object[]{id}, new RowMapper<StudentDTO>(){
+						"and tbl_registration.course_id = ? " +
+						"and tbl_registration.date_joined = ?";
+		List<StudentDTO> lstd = this.jdbcTemplate.query(select, new Object[]{id,date}, new RowMapper<StudentDTO>(){
 
 			public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 				StudentDTO std = new StudentDTO();
