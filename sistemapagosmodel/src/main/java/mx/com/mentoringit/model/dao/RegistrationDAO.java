@@ -25,7 +25,7 @@ public class RegistrationDAO implements IRegistration{
 
 
 	public List<StudentDTO> select(Integer id) throws Exception {
-		String select = "select tbl_student.name " + 
+		String select = "select tbl_student.id, tbl_student.name " + 
 						"from tbl_student, tbl_registration " +
 						"where tbl_registration.student_id = tbl_student.id " +
 						"and tbl_registration.course_id = ? ";
@@ -34,6 +34,7 @@ public class RegistrationDAO implements IRegistration{
 
 			public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 				StudentDTO std = new StudentDTO();
+				std.setId(rs.getInt("ID"));
 				std.setName(rs.getString("NAME"));
 				
 				return std;
