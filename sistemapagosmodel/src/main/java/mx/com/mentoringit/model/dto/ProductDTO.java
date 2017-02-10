@@ -1,6 +1,6 @@
 package mx.com.mentoringit.model.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ProductDTO {
 	

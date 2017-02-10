@@ -1,0 +1,48 @@
+package mx.com.mentoringit.model.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import mx.com.mentoringit.model.dto.PSPDTO;
+
+@Repository
+public class PSPDAO implements IPSP{
+	private JdbcTemplate jdbcTemplate;
+
+	@Autowired
+	public void setJdbcTemplate(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	public List<PSPDTO> lastPayment(){
+		String select = "select p.date_payment,s.name, s.email,s.phone,pr.name as courseName "+
+						"from tbl_payment as p, tbl_student as s, tbl_product as pr "+
+						"where p.student_id = s.id "+
+						"and p.product_id = pr.id";
+		
+		List<PSPDTO> lpsp = this.jdbcTemplate.query(select, new RowMapper<PSPDTO>(){
+
+			public PSPDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				PSPDTO psp = new PSPDTO();
+				
+				psp.setDatePayment(rs.getDate("date_payment"));
+				psp.setStudentName(rs.getString("name"));
+				psp.setEmail(rs.getString("email"));
+				psp.setPhone(rs.getString("phone"));
+				psp.setCourseName(rs.getString("courseName"));
+				
+				return psp;
+			}});
+		
+		return lpsp;
+	}
+
+
+}
