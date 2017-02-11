@@ -22,7 +22,8 @@ public class PSPDAO implements IPSP{
 	}
 	
 	public List<PSPDTO> lastPayment(){
-		String select = "select p.date_payment,s.name, s.email,s.phone,pr.name as courseName "+
+		String select = "select p.date_payment,s.name, s.email,s.phone,pr.name as courseName," +
+				 		"p.num_payment,p.amount_payment,p.type_payment,p.total_course "+
 						"from tbl_payment as p, tbl_student as s, tbl_product as pr "+
 						"where p.student_id = s.id "+
 						"and p.product_id = pr.id";
@@ -37,6 +38,10 @@ public class PSPDAO implements IPSP{
 				psp.setEmail(rs.getString("email"));
 				psp.setPhone(rs.getString("phone"));
 				psp.setCourseName(rs.getString("courseName"));
+				psp.setNumPayment(rs.getInt("num_payment"));
+				psp.setAmountPayment(rs.getDouble("amount_payment"));
+				psp.setTypePayment(rs.getString("type_payment"));
+				psp.setTotalCourse(rs.getDouble("total_course"));
 				
 				return psp;
 			}});

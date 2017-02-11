@@ -8,18 +8,13 @@ public class PSPDTO {
 	private String email;
 	private String phone;
 	private String courseName;
+	private Integer numPayment;
+	private Double amountPayment;
+	private String typePayment;
+	private Double totalCourse;
 	
 	public PSPDTO(){}
-	
-	public PSPDTO(Date datePayment, String studentName, String email, String phone, String courseName) {
-		super();
-		this.datePayment = datePayment;
-		this.studentName = studentName;
-		this.email = email;
-		this.phone = phone;
-		this.courseName = courseName;
-	}
-	
+		
 	public Date getDatePayment() {
 		return datePayment;
 	}
@@ -49,6 +44,38 @@ public class PSPDTO {
 	}
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
+	}
+
+	public Integer getNumPayment() {
+		return numPayment;
+	}
+
+	public void setNumPayment(Integer numPayment) {
+		this.numPayment = numPayment;
+	}
+
+	public Double getAmountPayment() {
+		return amountPayment;
+	}
+
+	public void setAmountPayment(Double amountPayment) {
+		this.amountPayment = amountPayment;
+	}
+
+	public String getTypePayment() {
+		return typePayment;
+	}
+
+	public void setTypePayment(String typePayment) {
+		this.typePayment = typePayment;
+	}
+
+	public Double getTotalCourse() {
+		return totalCourse;
+	}
+
+	public void setTotalCourse(Double totalCourse) {
+		this.totalCourse = totalCourse;
 	}
 
 }
