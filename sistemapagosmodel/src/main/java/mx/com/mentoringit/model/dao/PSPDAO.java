@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import mx.com.mentoringit.model.dto.PSPDTO;
 
+
 @Repository
 public class PSPDAO implements IPSP{
 	private JdbcTemplate jdbcTemplate;
@@ -48,6 +49,39 @@ public class PSPDAO implements IPSP{
 		
 		return lpsp;
 	}
+	
+	 public List<PSPDTO> paymentByStudent(Integer idStudent,Integer idProduct) throws Exception {
+		String select = "select p.date_payment,s.name, s.email,s.phone,pr.name as courseName,p.num_payment,"+
+						"p.amount_payment,p.type_payment,p.total_course "+ 
+						"from tbl_payment as p, tbl_student as s, tbl_product as pr "+
+						"where p.student_id = s.id "+
+						"and p.product_id = pr.id "+
+						"and p.student_id = ? "+
+						"and p.product_id = ?";
+		
+		List<PSPDTO> payments = this.jdbcTemplate.query(select, new Object[]{idStudent,idProduct}, new RowMapper<PSPDTO>(){
+
+			public PSPDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				PSPDTO ps = new PSPDTO();
+								
+				ps.setDatePayment(rs.getDate("date_payment"));
+				ps.setStudentName(rs.getString("name"));
+				ps.setEmail(rs.getString("email"));
+				ps.setPhone(rs.getString("phone"));
+				ps.setCourseName(rs.getString("courseName"));
+				ps.setNumPayment(rs.getInt("num_payment"));
+				ps.setAmountPayment(rs.getDouble("amount_payment"));
+				ps.setTypePayment(rs.getString("type_payment"));
+				ps.setTotalCourse(rs.getDouble("total_course"));
+				
+				return ps;
+			}
+		});		
+				
+		return payments;
+	}
+
+	
 
 
 }

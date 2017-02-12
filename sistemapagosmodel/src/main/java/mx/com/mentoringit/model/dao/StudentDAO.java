@@ -60,9 +60,8 @@ public class StudentDAO implements IStudent {
 		        });
 		return student;
 	}
-
-
-
+	
+	
 	public void insertStudent(StudentDTO student) throws Exception {
 		String insert ="insert into tbl_student(email,name,phone,status) "+ 
 						"values (?,?,?,1)";
@@ -70,5 +69,22 @@ public class StudentDAO implements IStudent {
 		this.jdbcTemplate.update(insert,student.getEmail(),student.getName(),student.getPhone());	
 		
 	}
+	
+	 public StudentDTO selectName(Integer idStudent) throws Exception {
+		StudentDTO student = this.jdbcTemplate.queryForObject(
+		        "select s.name from tbl_student as s where s.id = ?",
+		        new Object[]{idStudent},
+		        new RowMapper<StudentDTO>() {
+		            public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		                StudentDTO student = new StudentDTO();
+		                
+		                student.setName(rs.getString("name"));
+		                
+		                return student;
+		            }
+		        });
+		return student;
+	}
+	 
 
 }

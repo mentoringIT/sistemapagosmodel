@@ -9,5 +9,6 @@ public interface IStudent {
 	public List<StudentDTO> select() throws Exception;
 	public void insertStudent(StudentDTO student) throws Exception;
 	public StudentDTO selectIdMax() throws Exception;
+	 public StudentDTO selectName(Integer idStudent) throws Exception;
 
 }
