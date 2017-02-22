@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import mx.com.mentoringit.model.dto.CourseDTO;
+import mx.com.mentoringit.model.dto.StudentDTO;
 
 @Repository
 public class CourseDAO implements ICourse {
@@ -50,5 +51,22 @@ public class CourseDAO implements ICourse {
 
 		return lCourse;
 	}
+	
+	public CourseDTO selectName(Integer idCourse) throws Exception {
+		CourseDTO course = this.jdbcTemplate.queryForObject(
+		        "select c.name from tbl_course as c where c.id = ?",
+		        new Object[]{idCourse},
+		        new RowMapper<CourseDTO>() {
+		            public CourseDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		                CourseDTO course = new CourseDTO();
+		                
+		                course.setName(rs.getString("name"));
+		                
+		                return course;
+		            }
+		        });
+		return course;
+	}
+	 
 
 }
