@@ -1,16 +1,19 @@
 package mx.com.mentoringit.model.dto;
 
+import java.util.Date;
+
 public class ReportData {
 	
-	private String studentName;
-	private String courseName;
-	private String numPayment;
-	private String amountPayment;
-	private String datePayment;
-	private String typePayment;
-	private String remaining;
-	private String totalCourse;
+	private String studentName;//
+	private String courseName;//
+	private String numPayment;//
+	private String amountPayment;//
+	private String datePayment;//
+	private String typePayment;//
+	private String remaining;//*
+	private String totalCourse;//
 	
+		
 	public String getStudentName() {
 		return studentName;
 	}
