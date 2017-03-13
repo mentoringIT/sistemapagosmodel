@@ -70,15 +70,20 @@ public class StudentDAO implements IStudent {
 		
 	}
 	
-	 public StudentDTO selectName(Integer idStudent) throws Exception {
+	 public StudentDTO selectStudent(Integer idStudent) throws Exception {
 		StudentDTO student = this.jdbcTemplate.queryForObject(
-		        "select s.name from tbl_student as s where s.id = ?",
+		        "select * from tbl_student as s where s.id = ?",
 		        new Object[]{idStudent},
 		        new RowMapper<StudentDTO>() {
 		            public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		                StudentDTO student = new StudentDTO();
 		                
-		                student.setName(rs.getString("name"));
+		                student.setId(rs.getInt("ID"));
+						student.setEmail(rs.getString("EMAIL"));
+						student.setName(rs.getString("NAME"));
+						student.setPhone(rs.getString("PHONE"));
+						student.setAddres(rs.getString("ADDRESS"));
+						student.setStatus(rs.getShort("STATUS"));
 		                
 		                return student;
 		            }
