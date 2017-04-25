@@ -14,6 +14,11 @@ public class PaymentDTO {
 	private Integer product_id;
 	
 	
+	
+	public PaymentDTO() {	
+		this.num_payment = null;
+		this.total_course = 0.0;
+	}
 	public Integer getId() {
 		return id;
 	}
