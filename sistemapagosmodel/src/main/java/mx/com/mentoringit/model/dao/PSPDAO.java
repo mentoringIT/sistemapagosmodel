@@ -27,7 +27,7 @@ public class PSPDAO implements IPSP{
 				 		"p.num_payment,p.amount_payment,p.type_payment,p.total_course "+
 						"from tbl_payment as p, tbl_student as s, tbl_product as pr "+
 						"where p.student_id = s.id "+
-						"and p.product_id = pr.id";
+						"and p.product_id = pr.id order by s.ID desc";
 		
 		List<PSPDTO> lpsp = this.jdbcTemplate.query(select, new RowMapper<PSPDTO>(){
 
