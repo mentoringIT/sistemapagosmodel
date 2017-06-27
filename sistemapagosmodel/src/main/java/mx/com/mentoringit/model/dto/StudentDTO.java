@@ -7,6 +7,7 @@ public class StudentDTO {
 	private String phone;
 	private String addres;
 	private Short status;
+	private String type_register;
 	
 	public Integer getId() {
 		return id;
@@ -45,6 +46,12 @@ public class StudentDTO {
 		this.status = status;
 	}
 	
+	public String getType_register() {
+		return type_register;
+	}
+	public void setType_register(String type_register) {
+		this.type_register = type_register;
+	}
 	@Override
 	public String toString() {
 		return  name;

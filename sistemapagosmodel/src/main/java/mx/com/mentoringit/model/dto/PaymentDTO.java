@@ -12,6 +12,7 @@ public class PaymentDTO {
 	private Date date_payment;
 	private Double total_course;
 	private Integer product_id;
+	private String type_register;
 	
 	
 	
@@ -73,6 +74,12 @@ public class PaymentDTO {
 	}
 	public void setDate_payment(Date date_payment) {
 		this.date_payment = date_payment;
+	}
+	public String getType_register() {
+		return type_register;
+	}
+	public void setType_register(String type_register) {
+		this.type_register = type_register;
 	}
 	
 

@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import mx.com.mentoringit.model.dto.RegistrationDTO;
 import mx.com.mentoringit.model.dto.StudentDTO;
 
 @Repository
@@ -25,12 +26,12 @@ public class RegistrationDAO implements IRegistration{
 
 
 	public List<StudentDTO> select(Integer id) throws Exception {
-		String select = "select tbl_student.id, tbl_student.name " + 
-						"from tbl_student, tbl_registration " +
-						"where tbl_registration.student_id = tbl_student.id " +
-						"and tbl_registration.course_id = ? ";
+		String studentByCourse = "select s.id, s.name " + 
+								 "from tbl_student as s, tbl_registration as r " + 
+								 "where r.student_id = s.id " + 
+								 "and r.course_id = ?";
 		
-		List<StudentDTO> lstd = this.jdbcTemplate.query(select, new Object[]{id}, new RowMapper<StudentDTO>(){
+		List<StudentDTO> lstd = this.jdbcTemplate.query(studentByCourse, new Object[]{id}, new RowMapper<StudentDTO>(){
 
 			public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 				StudentDTO std = new StudentDTO();
@@ -42,6 +43,15 @@ public class RegistrationDAO implements IRegistration{
 		});		
 				
 		return lstd;
+	}
+	
+	public void insertRegister(RegistrationDTO registrationDTO){
+		String insert = "insert into tbl_registration (course_id,student_id,status,date_joined,comment) " +
+					    "value(?,?,?,(select start_date from tbl_product where id = ?),?)";
+				
+		this.jdbcTemplate.update(insert, registrationDTO.getCourseId(),registrationDTO.getStudentId(),
+				registrationDTO.getStatus(),registrationDTO.getProductoId(),registrationDTO.getComment());
+		
 	}
 
 }

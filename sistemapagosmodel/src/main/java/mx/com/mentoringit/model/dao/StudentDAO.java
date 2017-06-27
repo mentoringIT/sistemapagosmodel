@@ -63,10 +63,11 @@ public class StudentDAO implements IStudent {
 	
 	
 	public void insertStudent(StudentDTO student) throws Exception {
-		String insert ="insert into tbl_student(email,name,phone,status) "+ 
-						"values (?,?,?,1)";
+		String insert ="insert into tbl_student(email,name,phone,status,type_register) "+ 
+						"values (?,?,?,?,?)";
 		
-		this.jdbcTemplate.update(insert,student.getEmail(),student.getName(),student.getPhone());	
+		this.jdbcTemplate.update(insert,student.getEmail(),student.getName(),student.getPhone()
+				,student.getStatus(),student.getType_register());	
 		
 	}
 	

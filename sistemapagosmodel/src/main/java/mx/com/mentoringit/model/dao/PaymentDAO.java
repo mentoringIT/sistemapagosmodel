@@ -28,14 +28,14 @@ public class PaymentDAO implements IPayment{
 	
 	public void insertPayment(PaymentDTO payment) throws Exception {
 		String insert ="insert into tbl_payment " +
-						"(student_id,course_id,num_payment,amount_payment,type_payment,date_payment,total_course,product_id) " +
-						"values (?,?,?,?,?,?,?,?)";
+						"(student_id,course_id,num_payment,amount_payment,type_payment,date_payment,total_course,product_id,type_register) " +
+						"values (?,?,?,?,?,?,?,?,?)";
 		
 		Date date = new Date(payment.getDate_payment().getTime());
 		
 		this.jdbcTemplate.update(insert,payment.getStudent_id(),payment.getCourse_id(),
 				payment.getNum_payment(),payment.getAmount_payment(),payment.getType_payment(),date,
-				payment.getTotal_course(),payment.getProduct_id());
+				payment.getTotal_course(),payment.getProduct_id(),payment.getType_register());
 	
 		
 	}
