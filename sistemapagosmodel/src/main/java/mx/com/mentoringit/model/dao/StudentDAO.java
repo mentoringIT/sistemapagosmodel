@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import mx.com.mentoringit.model.dto.PaymentDTO;
+import mx.com.mentoringit.model.dto.ProfileDTO;
 import mx.com.mentoringit.model.dto.StudentDTO;
 import mx.com.mentoringit.model.dto.UserDTO;
 
@@ -47,50 +48,52 @@ public class StudentDAO implements IStudent {
 
 		return lAlumnos;
 	}
-	
+
 	public StudentDTO selectIdMax() throws Exception {
-		StudentDTO student = this.jdbcTemplate.queryForObject(
-		        "select max(s.id) as ID from tbl_student as s",
-		        new RowMapper<StudentDTO>() {
-		            public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-		                StudentDTO student = new StudentDTO();
-		                student.setId(rs.getInt("ID"));
-		                return student;
-		            }
-		        });
+		StudentDTO student = this.jdbcTemplate.queryForObject("select max(s.id) as ID from tbl_student as s",
+				new RowMapper<StudentDTO>() {
+					public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+						StudentDTO student = new StudentDTO();
+						student.setId(rs.getInt("ID"));
+						return student;
+					}
+				});
 		return student;
 	}
-	
-	
+
 	public void insertStudent(StudentDTO student) throws Exception {
-		String insert ="insert into tbl_student(email,name,phone,status,type_register) "+ 
-						"values (?,?,?,?,?)";
-		
-		this.jdbcTemplate.update(insert,student.getEmail(),student.getName(),student.getPhone()
-				,student.getStatus(),student.getType_register());	
-		
+		String insert = "insert into tbl_student(email,name,phone,status,type_register) " + "values (?,?,?,?,?)";
+
+		this.jdbcTemplate.update(insert, student.getEmail(), student.getName(), student.getPhone(), student.getStatus(),
+				student.getType_register());
+
 	}
-	
-	 public StudentDTO selectStudent(Integer idStudent) throws Exception {
-		StudentDTO student = this.jdbcTemplate.queryForObject(
-		        "select * from tbl_student as s where s.id = ?",
-		        new Object[]{idStudent},
-		        new RowMapper<StudentDTO>() {
-		            public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-		                StudentDTO student = new StudentDTO();
-		                
-		                student.setId(rs.getInt("ID"));
+
+//	public void insertProfile(ProfileDTO profile) throws Exception {
+//		String insert = "insert into tbl_student(email,name,phone,status,type_register) " + "values (?,?,?,?,?)";
+//
+//		this.jdbcTemplate.update(insert, student.getEmail(), student.getName(), student.getPhone(), student.getStatus(),
+//				student.getType_register());
+//
+//	}
+
+	public StudentDTO selectStudent(Integer idStudent) throws Exception {
+		StudentDTO student = this.jdbcTemplate.queryForObject("select * from tbl_student as s where s.id = ?",
+				new Object[] { idStudent }, new RowMapper<StudentDTO>() {
+					public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+						StudentDTO student = new StudentDTO();
+
+						student.setId(rs.getInt("ID"));
 						student.setEmail(rs.getString("EMAIL"));
 						student.setName(rs.getString("NAME"));
 						student.setPhone(rs.getString("PHONE"));
 						student.setAddres(rs.getString("ADDRESS"));
 						student.setStatus(rs.getShort("STATUS"));
-		                
-		                return student;
-		            }
-		        });
+
+						return student;
+					}
+				});
 		return student;
 	}
-	 
 
 }

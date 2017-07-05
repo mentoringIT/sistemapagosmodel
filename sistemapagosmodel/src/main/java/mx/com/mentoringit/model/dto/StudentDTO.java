@@ -9,6 +9,8 @@ public class StudentDTO {
 	private Short status;
 	private String type_register;
 	
+	public StudentDTO(){}
+	
 	public Integer getId() {
 		return id;
 	}
