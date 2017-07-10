@@ -69,14 +69,6 @@ public class StudentDAO implements IStudent {
 
 	}
 
-//	public void insertProfile(ProfileDTO profile) throws Exception {
-//		String insert = "insert into tbl_student(email,name,phone,status,type_register) " + "values (?,?,?,?,?)";
-//
-//		this.jdbcTemplate.update(insert, student.getEmail(), student.getName(), student.getPhone(), student.getStatus(),
-//				student.getType_register());
-//
-//	}
-
 	public StudentDTO selectStudent(Integer idStudent) throws Exception {
 		StudentDTO student = this.jdbcTemplate.queryForObject("select * from tbl_student as s where s.id = ?",
 				new Object[] { idStudent }, new RowMapper<StudentDTO>() {

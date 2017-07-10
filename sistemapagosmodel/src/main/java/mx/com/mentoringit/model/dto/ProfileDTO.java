@@ -6,8 +6,6 @@ public class ProfileDTO {
 	private String certification;
 	private String degree;
 	private String cedula;
-	
-	public ProfileDTO() {}
 
 	public Integer getStudentId() {
 		return studentId;
