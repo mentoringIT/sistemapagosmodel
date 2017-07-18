@@ -32,7 +32,7 @@ public class StudentDAO implements IStudent {
 	}
 
 	public List<StudentDTO> select() throws Exception {
-		String select = "select * from tbl_student";
+		String select = "select * from tbl_student where type_register = 't'";
 		List<StudentDTO> lAlumnos = this.jdbcTemplate.query(select, new RowMapper<StudentDTO>() {
 			public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 				StudentDTO student = new StudentDTO();
