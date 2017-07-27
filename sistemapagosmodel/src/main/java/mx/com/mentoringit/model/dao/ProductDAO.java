@@ -23,7 +23,7 @@ public class ProductDAO implements IProduct{
 	}
 	
 	 public List<ProductDTO> startDate(int id, String date1, String date2) throws Exception {
-		String select = "select  p.id, p.course_id, p.start_date from tbl_product as p "+
+		String select = "select  p.id, p.course_id, p.start_date, p.another_details from tbl_product as p "+
 						"where p.course_id = ? "+
 						"and p.start_date between ? and ?";
 		
@@ -35,6 +35,7 @@ public class ProductDAO implements IProduct{
 				product.setId(rs.getInt("ID"));
 				product.setCourse_id(rs.getInt("COURSE_ID"));
 				product.setStart_date(rs.getDate("START_DATE"));
+				product.setAnotherDetails(rs.getString("ANOTHER_DETAILS"));
 				
 				return product;
 			}

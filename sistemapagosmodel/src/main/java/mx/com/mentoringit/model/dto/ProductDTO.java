@@ -7,6 +7,7 @@ public class ProductDTO {
 	private Integer id;
 	private Integer course_id;
 	private Date start_date;
+	private String anotherDetails;
 	
 	public Integer getId() {
 		return id;
@@ -27,9 +28,15 @@ public class ProductDTO {
 		this.start_date = start_date;
 	}
 	
+	public String getAnotherDetails() {
+		return anotherDetails;
+	}
+	public void setAnotherDetails(String anotherDetails) {
+		this.anotherDetails = anotherDetails;
+	}
 	@Override
 	public String toString() {
-		return start_date+"";
+		return start_date+" " + anotherDetails;
 	}
 	
 	
