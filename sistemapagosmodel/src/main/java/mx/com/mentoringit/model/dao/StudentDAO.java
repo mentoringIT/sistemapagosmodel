@@ -120,7 +120,7 @@ public class StudentDAO implements IStudent {
 	public void updateInstructor(UpdateInstructorDTO instructorDTO) throws Exception {
 		String update = "update tbl_student as s, tbl_profile as p "
 				+ "set s.phone = ?, s.email = ? , p.type_study = ?, p.certification = ?, p.degree = ?, p.cedula = ? "
-				+ "where s.id = p.student_id " + "and s.id = ";
+				+ "where s.id = p.student_id " + "and s.id = ?";
 
 		this.jdbcTemplate.update(update, instructorDTO.getPhone(), instructorDTO.getEmail(), instructorDTO.getTypeStudy(), instructorDTO.getCertification(),
 				instructorDTO.getDegree(), instructorDTO.getCedula(), instructorDTO.getId());
